@@ -31,7 +31,6 @@ class Word {
     "classy", "tendency", "toothpaste", "derive", "observation",
     "nebulous", "adjoining", "immense", "noxious", "function"];  
     this.currentWord = [];
-    this.sortWord = [];
   } 
   pickRandomWord (){
     const randNum = Math.floor(Math.random() * this.wordBank.length + 1)
@@ -46,6 +45,7 @@ const word = new Word();
 
 const game = {
   guessedLetters: [],
+  sortWord: [];
 
   checkForLetters(str){
     // convert into array and check for matching letter
