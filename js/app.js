@@ -61,34 +61,43 @@ class Word {
 const word = new Word();
 
 const game = {
-  // guessedLetter: [],
+
   usedLetters: [],
-  sortWord: [],
+
+  // TODO: add property to kep track of number of guesses? guesses remaining -- it can count down 
+  
+
   //see if letter user guessd is in the word
+  checkForLetter(letter) {
 
-  checkForLetter(letter){
-   // convert into array and check for matching letter
-    const splitString = word.currentWord.split(""); // get array of characters
-    // loop through array of chars, if it matches, change letter in displaySpaces at that index
-    for (i = 0; i < splitString.length; i++){ 
-      if (letter === splitString[i]){
-        //switch letter everywhere it occurs in displaySpaces
-        word.displaySpaces[i] = letter;
-        // 
+    // TODO if the letter apperas in guessed letters 
+      // TODO say nah -- jQ
+
+    //TODO otherwise/else
+      // convert into array and check for matching letter
+      const splitString = word.currentWord.split(""); // get array of characters
+      // loop through array of chars, if it matches, change letter in displaySpaces at that index
+      for (i = 0; i < splitString.length; i++){ 
+        if (letter === splitString[i]){
+          //switch letter everywhere it occurs in displaySpaces
+          word.displaySpaces[i] = letter;
+
+        } else {
 
 
-        // const grabData = word.displaySpaces.splice(splitString[i], splitString[i], [i], letter).toString()
-        // console.log(grabData)
-        console.log("you fucking rock, correct") //print to dom in appropriat place of word
-      } else {
-        console.log("guess again")
+            // TODO: track wrong guesses -- reduce the geussesRemaing property
+            // TODO: if it is then 0, game over
+
+            // TODO: write and call call reset function (see below)
+
+            console.log("guess again")
+        }
       }
-    }
 
-    this.usedLetters.push(" " + letter + " ")
-    // push letter to used letters
-    this.updateLetterBox()
-    word.updateDisplayedWord()
+      this.usedLetters.push(" " + letter + " ")
+      // push letter to used letters
+      this.updateLetterBox()
+      word.updateDisplayedWord()
   },
 
   // this should iterate over game.usedLetters,
@@ -97,8 +106,18 @@ const game = {
   updateLetterBox(){
     
     $('#usedLetter').text(" " + this.usedLetters + " ") // note: usedLetters is an ARRAY
+
+    // TODO: once you have guesses remaining going down for every guess, 
+    // TODO: jQ update remaining guesses also 
   }
- 
+  
+  reset() {
+    // TODO: get new word (that will autoamtically update scoreboard)
+    // TODO: reset guessesRemaining
+
+    // for later: next player/switch turn
+
+  }
 }
 
 $('#name-form').on('submit', (e) => {
@@ -107,6 +126,22 @@ $('#name-form').on('submit', (e) => {
   const guessLetter = $('#guess').val();
   game.checkForLetter(guessLetter);
 });   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
