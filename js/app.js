@@ -31,20 +31,42 @@ class Word {
     "classy", "tendency", "toothpaste", "derive", "observation",
     "nebulous", "adjoining", "immense", "noxious", "function"];  
     this.currentWord = [];
+    this.sortWord = [];
   } 
   pickRandomWord (){
     const randNum = Math.floor(Math.random() * this.wordBank.length + 1)
     const newWord = this.wordBank.splice(randNum, 1);
     this.currentWord.push(newWord)
-    console.log(this.wordBank.splice(randNum, 1))
   }
-  checkForLetters(){
-    // convert into array and check for matching letter
-    for (let i = 0; i < currentWord.length; i++){
-      // if (currentWord[i])
-    }
 
-  }
 }
 
 const word = new Word();
+
+
+const game = {
+  guessedLetters: [],
+
+  checkForLetters(str){
+    // convert into array and check for matching letter
+    const splitString = str.split(word.currentWord, "");
+    console.log(splitString);
+    for (var i = 0; i < splitString.length; i++){
+      if (guessedLetters === splitString[i]){
+        console.log(splitString[i]) //print to dom in appropriat place of word
+      }else {
+        console.log("guess again")
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+

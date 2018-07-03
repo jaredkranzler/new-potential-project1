@@ -1,5 +1,6 @@
 # HangMan
 By Jared Kanzler
+
 Guess the letters of the word before you make the hang man.
 
 ## User Story
