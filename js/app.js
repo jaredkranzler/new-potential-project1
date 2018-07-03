@@ -27,59 +27,203 @@ console.log('js works')
 class Word {      
   constructor(){          
     this.wordBank =
-    ["abounding", "dispensable", "fallacious", "psychotic", "thinkable",
+    ["dude", "asson", "abounding", "dispensable", "fallacious", "psychotic", "thinkable",
     "classy", "tendency", "toothpaste", "derive", "observation",
     "nebulous", "adjoining", "immense", "noxious", "function"];  
     this.currentWord = "";
     this.pickRandomWord();
     //number of blank spaces
-    this.displaySpaces = []
+    this.displaySpaces = [];
     //takes current word and gives back an array with #of blank spaces
     const arrayString = this.currentWord.split("");
-    const numSpaces= ("_").repeat(arrayString.length)
-    this.displaySpaces.push(numSpaces.split(""))
+    const numSpaces = ("_").repeat(arrayString.length)
+    this.displaySpaces = numSpaces.split("")
 
-
+    this.updateDisplayedWord()
   } 
-  pickRandomWord (){
+  pickRandomWord () {
     // pick random word from word bank and push to new array
-    const randNum = Math.floor(Math.random() * this.wordBank.length + 1)
+    const randNum = Math.floor((Math.random() * this.wordBank.length))
     const newWord = this.wordBank.splice(randNum, 1);
     this.currentWord = newWord.toString();
+
+  }
+  updateDisplayedWord() {
+    // TODO: fix comma problem: iterate over displaySpaces, append each letter, and maybe a space, to theDOM
+    //prints blank spaces to Dom
+    $('#blankSpace').text(this.displaySpaces)
+    console.log(this.displaySpaces)
+    //want to have array with no commas
   }
   
 }
 
 const word = new Word();
 
-
 const game = {
-  guessedLetter: [],
+  // guessedLetter: [],
   usedLetters: [],
   sortWord: [],
   //see if letter user guessd is in the word
+
   checkForLetter(letter){
    // convert into array and check for matching letter
-    const splitString = word.currentWord.split("");
-    for (var i = 0; i < splitString.length; i++){
+    const splitString = word.currentWord.split(""); // get array of characters
+    // loop through array of chars, if it matches, change letter in displaySpaces at that index
+    for (i = 0; i < splitString.length; i++){ 
       if (letter === splitString[i]){
-        //
-      console.log("you fucking rock, correct") //print to dom in appropriat place of word
-      }else {
-      console.log("guess again")
+        //switch letter everywhere it occurs in displaySpaces
+        word.displaySpaces[i] = letter;
+        // 
+
+
+        // const grabData = word.displaySpaces.splice(splitString[i], splitString[i], [i], letter).toString()
+        // console.log(grabData)
+        console.log("you fucking rock, correct") //print to dom in appropriat place of word
+      } else {
+        console.log("guess again")
       }
     }
-  }
 
+    this.usedLetters.push(" " + letter + " ")
+    // push letter to used letters
+    this.updateLetterBox()
+    word.updateDisplayedWord()
+  },
+
+  // this should iterate over game.usedLetters,
+  // rebuild the output string
+  // and replace in html
+  updateLetterBox(){
+    
+    $('#usedLetter').text(" " + this.usedLetters + " ") // note: usedLetters is an ARRAY
+  }
  
 }
 
+$('#name-form').on('submit', (e) => {
+  console.log("listener");
+  e.preventDefault();
+  const guessLetter = $('#guess').val();
+  game.checkForLetter(guessLetter);
+});   
 
 
 
 
 
 
+ // Hangman
+//   canvas =  function(){
+
+//     myStickman = document.getElementById("stickman");
+//     context = myStickman.getContext('2d');
+//     context.beginPath();
+//     context.strokeStyle = "#fff";
+//     context.lineWidth = 2;
+//   };
+  
+//     head = function(){
+//       myStickman = document.getElementById("stickman");
+//       context = myStickman.getContext('2d');
+//       context.beginPath();
+//       context.arc(60, 25, 10, 0, Math.PI*2, true);
+//       context.stroke();
+//     }
+    
+//   draw = function($pathFromx, $pathFromy, $pathTox, $pathToy) {
+    
+//     context.moveTo($pathFromx, $pathFromy);
+//     context.lineTo($pathTox, $pathToy);
+//     context.stroke(); 
+// }
+
+//    frame1 = function() {
+//      draw (0, 150, 150, 150);
+//    };
+   
+//    frame2 = function() {
+//      draw (10, 0, 10, 600);
+//    };
+  
+//    frame3 = function() {
+//      draw (0, 5, 70, 5);
+//    };
+  
+//    frame4 = function() {
+//      draw (60, 5, 60, 15);
+//    };
+  
+//    torso = function() {
+//      draw (60, 36, 60, 70);
+//    };
+  
+//    rightArm = function() {
+//      draw (60, 46, 100, 50);
+//    };
+  
+//    leftArm = function() {
+//      draw (60, 46, 20, 50);
+//    };
+  
+//    rightLeg = function() {
+//      draw (60, 70, 100, 100);
+//    };
+  
+//    leftLeg = function() {
+//      draw (60, 70, 20, 100);
+//    };
+  
+//   drawArray = [rightLeg, leftLeg, rightArm, leftArm,  torso,  head, frame4, frame3, frame2, frame1]; 
 
 
+//   // OnClick Function
+//    check = function () {
+//     list.onclick = function () {
+//       var geuss = (this.innerHTML);
+//       this.setAttribute("class", "active");
+//       this.onclick = null;
+//       for (var i = 0; i < word.length; i++) {
+//         if (word[i] === geuss) {
+//           geusses[i].innerHTML = geuss;
+//           counter += 1;
+//         } 
+//       }
+//       var j = (word.indexOf(geuss));
+//       if (j === -1) {
+//         lives -= 1;
+//         comments();
+//         animate();
+//       } else {
+//         comments();
+//       }
+//     }
+//   }
+  
+    
+  // // Play
+  // play = function () {
+  //   categories = [
+  //       ["everton", "liverpool", "swansea", "chelsea", "hull", "manchester-city", "newcastle-united"],
+  //       ["alien", "dirty-harry", "gladiator", "finding-nemo", "jaws"],
+  //       ["manchester", "milan", "madrid", "amsterdam", "prague"]
+  //   ];
+
+  //   chosenCategory = categories[Math.floor(Math.random() * categories.length)];
+  //   word = chosenCategory[Math.floor(Math.random() * chosenCategory.length)];
+  //   word = word.replace(/\s/g, "-");
+  //   console.log(word);
+  //   buttons();
+
+  //   geusses = [ ];
+  //   lives = 10;
+  //   counter = 0;
+  //   space = 0;
+  //   result();
+  //   comments();
+  //   selectCat();
+  //   canvas();
+  // }
+
+  // play();
 
