@@ -32,6 +32,14 @@ class Word {
     "nebulous", "adjoining", "immense", "noxious", "function"];  
     this.currentWord = "";
     this.pickRandomWord();
+    //number of blank spaces
+    this.displaySpaces = []
+    //takes current word and gives back an array with #of blank spaces
+    const arrayString = this.currentWord.split("");
+    const numSpaces= ("_").repeat(arrayString.length)
+    this.displaySpaces.push(numSpaces.split(""))
+
+
   } 
   pickRandomWord (){
     // pick random word from word bank and push to new array
