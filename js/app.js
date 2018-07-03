@@ -49,11 +49,12 @@ class Word {
 
   }
   updateDisplayedWord() {
-    // TODO: fix comma problem: iterate over displaySpaces, append each letter, and maybe a space, to theDOM
-    //prints blank spaces to Dom
-    $('#blankSpace').text(this.displaySpaces)
-    console.log(this.displaySpaces)
     //want to have array with no commas
+    // DONE: fix comma problem: iterate over displaySpaces, append each letter, and maybe a space, to theDOM
+    for (let i = 0; i < this.displaySpaces.length; i++){
+    $('#blankSpace').append(this.displaySpaces[i] + " ")
+    }
+    console.log(this.displaySpaces)
   }
   
 }
@@ -63,7 +64,7 @@ const word = new Word();
 const game = {
 
   usedLetters: [],
-
+  guessesLeft: "",
   // TODO: add property to kep track of number of guesses? guesses remaining -- it can count down 
   
 
@@ -111,13 +112,13 @@ const game = {
     // TODO: jQ update remaining guesses also 
   }
   
-  reset() {
+  // reset() {
     // TODO: get new word (that will autoamtically update scoreboard)
     // TODO: reset guessesRemaining
 
     // for later: next player/switch turn
 
-  }
+  // }
 }
 
 $('#name-form').on('submit', (e) => {
