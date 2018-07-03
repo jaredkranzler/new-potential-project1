@@ -16,3 +16,8 @@ Guess the letters of the word before you make the hang man.
 * create logic
 * player can type a letter to guess
 
+## Wireframes
+Inline-style: 
+![alt text](https://github.com/jaredkranzler/new-potential-project1/blob/master/images/IMG_4774.jpg "Hangman Wireframe")
+
+
