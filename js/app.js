@@ -30,35 +30,40 @@ class Word {
     ["abounding", "dispensable", "fallacious", "psychotic", "thinkable",
     "classy", "tendency", "toothpaste", "derive", "observation",
     "nebulous", "adjoining", "immense", "noxious", "function"];  
-    this.currentWord = [];
+    this.currentWord = "";
+    this.pickRandomWord();
   } 
   pickRandomWord (){
+    // pick random word from word bank and push to new array
     const randNum = Math.floor(Math.random() * this.wordBank.length + 1)
     const newWord = this.wordBank.splice(randNum, 1);
-    this.currentWord.push(newWord)
+    this.currentWord = newWord.toString();
   }
-
+  
 }
 
 const word = new Word();
 
 
 const game = {
-  guessedLetters: [],
-  sortWord: [];
-
-  checkForLetters(str){
-    // convert into array and check for matching letter
-    const splitString = str.split(word.currentWord, "");
-    console.log(splitString);
+  guessedLetter: [],
+  usedLetters: [],
+  sortWord: [],
+  //see if letter user guessd is in the word
+  checkForLetter(letter){
+   // convert into array and check for matching letter
+    const splitString = word.currentWord.split("");
     for (var i = 0; i < splitString.length; i++){
-      if (guessedLetters === splitString[i]){
-        console.log(splitString[i]) //print to dom in appropriat place of word
+      if (letter === splitString[i]){
+        //
+      console.log("you fucking rock, correct") //print to dom in appropriat place of word
       }else {
-        console.log("guess again")
+      console.log("guess again")
       }
     }
   }
+
+ 
 }
 
 
