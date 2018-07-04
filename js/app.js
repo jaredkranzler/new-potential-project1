@@ -38,7 +38,6 @@ class Word {
     const arrayString = this.currentWord.split("");
     const numSpaces = ("_").repeat(arrayString.length)
     this.displaySpaces = numSpaces.split("")
-
     this.updateDisplayedWord()
   } 
   pickRandomWord () {
@@ -51,12 +50,15 @@ class Word {
   updateDisplayedWord() {
     //want to have array with no commas
     // DONE: fix comma problem: iterate over displaySpaces, append each letter, and maybe a space, to theDOM
+
+    // clear what was previously there
+    
     for (let i = 0; i < this.displaySpaces.length; i++){
-    $('#blankSpace').append(this.displaySpaces[i] + " ")
+      $('#blankSpace').append(this.displaySpaces[i] + " ")
     }
     console.log(this.displaySpaces)
   }
-  
+
 }
 
 const word = new Word();
@@ -66,7 +68,9 @@ const game = {
   usedLetters: [],
   guessesLeft: "",
   // TODO: add property to kep track of number of guesses? guesses remaining -- it can count down 
-  
+  // remainingGuesses (){
+  // }
+
 
   //see if letter user guessd is in the word
   checkForLetter(letter) {
@@ -82,7 +86,6 @@ const game = {
         if (letter === splitString[i]){
           //switch letter everywhere it occurs in displaySpaces
           word.displaySpaces[i] = letter;
-
         } else {
 
 
@@ -95,10 +98,11 @@ const game = {
         }
       }
 
-      this.usedLetters.push(" " + letter + " ")
+      this.usedLetters.push(" " + letter + " ");
       // push letter to used letters
-      this.updateLetterBox()
-      word.updateDisplayedWord()
+      this.updateLetterBox();
+      $('#blankSpace').empty()
+      word.updateDisplayedWord();
   },
 
   // this should iterate over game.usedLetters,
