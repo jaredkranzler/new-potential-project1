@@ -60,10 +60,19 @@ const game = {
         if (letter === splitString[i]){
           //switch letter everywhere it occurs in displaySpaces
           word.displaySpaces[i] = letter;
+        } 
+      } 
+
+      for (i = 0; i < splitString.length; i++){
+        if (letter === splitString[i]){
+          //switch letter everywhere it occurs in displaySpaces
           correctLetter = true
           break;
         } else {
           correctLetter = false;
+        }
+        if (splitString[i] === $('#blankSpace')[i]){
+          alert('you fucking genius!')
         }
       }
       // if we didn't find it (see boolean)
@@ -72,6 +81,10 @@ const game = {
         this.guessesLeft -= 1;
       }
       console.log(correctLetter)
+
+      if (this.guessesLeft === 0){
+        alert("You suck at Hangman, maybe learn how to spell!")
+      }
 
       // push letter to used letters
       this.usedLetters.push(" " + letter + " ");
