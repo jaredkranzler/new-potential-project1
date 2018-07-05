@@ -1,28 +1,4 @@
-console.log('js works')
-
-
-//word class
-// word bank
-// check word function take current word thats eing play and takes in a letter
-// turn word into array and check if letter is in array 
-// const randomWord == wordBank[i]
-
-// use splice
-
-// measure length of array 
-
-
-// game that keeps track of player and player scores
-
-
-// anytime someone goes scan the array and find the index of where te letter are and 
-// display on screen
-// have a render board function.
-
-// check array of what ever letter is chosen and render letter on page
-
-
-
+console.log('Lifes a Garden Dig It')
 
 class Word {      
   constructor(){          
@@ -55,9 +31,11 @@ class Word {
     
     for (let i = 0; i < this.displaySpaces.length; i++){
       $('#blankSpace').append(this.displaySpaces[i] + " ")
-    }
+    } 
+    
     console.log(this.displaySpaces)
-  }
+  } 
+
 
 }
 
@@ -66,7 +44,7 @@ const word = new Word();
 const game = {
 
   usedLetters: [],
-  guessesLeft: "",
+  guessesLeft: 8,
   // TODO: add property to kep track of number of guesses? guesses remaining -- it can count down 
   // remainingGuesses (){
   // }
@@ -78,44 +56,45 @@ const game = {
     // TODO if the letter apperas in guessed letters 
       // TODO say nah -- jQ
 
-    //TODO otherwise/else
-      // convert into array and check for matching letter
+      // declare if we found it boolean
+      let correctLetter = true;      
       const splitString = word.currentWord.split(""); // get array of characters
       // loop through array of chars, if it matches, change letter in displaySpaces at that index
       for (i = 0; i < splitString.length; i++){ 
         if (letter === splitString[i]){
           //switch letter everywhere it occurs in displaySpaces
           word.displaySpaces[i] = letter;
+          correctLetter = true
         } else {
-
-
-            // TODO: track wrong guesses -- reduce the geussesRemaing property
-            // TODO: if it is then 0, game over
-
-            // TODO: write and call call reset function (see below)
-
-            console.log("guess again")
+          correctLetter = false;
         }
       }
+      if (false === correctLetter){
+        this.guessesLeft -= 1;
+      }
+      console.log(correctLetter)
+      // if we didn't find it (see boolean)
+      // subtract score
 
       this.usedLetters.push(" " + letter + " ");
       // push letter to used letters
       this.updateLetterBox();
+      //.empty deletes the duplicates that are created everytime the button is clicked
       $('#blankSpace').empty()
       word.updateDisplayedWord();
+
   },
 
-  // this should iterate over game.usedLetters,
-  // rebuild the output string
-  // and replace in html
   updateLetterBox(){
-    
+    $('#attempts').text(game.guessesLeft)
     $('#usedLetter').text(" " + this.usedLetters + " ") // note: usedLetters is an ARRAY
 
     // TODO: once you have guesses remaining going down for every guess, 
     // TODO: jQ update remaining guesses also 
+  },
+  reset() {
+    $('#guess') = $emptyString;
   }
-  
   // reset() {
     // TODO: get new word (that will autoamtically update scoreboard)
     // TODO: reset guessesRemaining
@@ -130,13 +109,9 @@ $('#name-form').on('submit', (e) => {
   e.preventDefault();
   const guessLetter = $('#guess').val();
   game.checkForLetter(guessLetter);
+  game.reset()
+
 });   
-
-
-
-
-
-
 
 
 
