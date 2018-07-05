@@ -45,40 +45,39 @@ const game = {
 
   usedLetters: [],
   guessesLeft: 8,
-  // TODO: add property to kep track of number of guesses? guesses remaining -- it can count down 
-  // remainingGuesses (){
-  // }
 
 
   //see if letter user guessd is in the word
   checkForLetter(letter) {
 
-    // TODO if the letter apperas in guessed letters 
-      // TODO say nah -- jQ
 
       // declare if we found it boolean
       let correctLetter = true;      
       const splitString = word.currentWord.split(""); // get array of characters
       // loop through array of chars, if it matches, change letter in displaySpaces at that index
+
       for (i = 0; i < splitString.length; i++){ 
         if (letter === splitString[i]){
           //switch letter everywhere it occurs in displaySpaces
           word.displaySpaces[i] = letter;
           correctLetter = true
+          break;
         } else {
           correctLetter = false;
         }
       }
+      // if we didn't find it (see boolean)
       if (false === correctLetter){
+        // subtract score
         this.guessesLeft -= 1;
       }
       console.log(correctLetter)
-      // if we didn't find it (see boolean)
-      // subtract score
 
-      this.usedLetters.push(" " + letter + " ");
       // push letter to used letters
+      this.usedLetters.push(" " + letter + " ");
+      
       this.updateLetterBox();
+
       //.empty deletes the duplicates that are created everytime the button is clicked
       $('#blankSpace').empty()
       word.updateDisplayedWord();
@@ -93,7 +92,7 @@ const game = {
     // TODO: jQ update remaining guesses also 
   },
   reset() {
-    $('#guess') = $emptyString;
+
   }
   // reset() {
     // TODO: get new word (that will autoamtically update scoreboard)
