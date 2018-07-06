@@ -1,26 +1,28 @@
 console.log('Lifes a Garden Dig It')
 
-class Word {      
-  constructor(){          
-    this.wordBank =
-    ["dude", "asson", "abounding", "dispensable", "fallacious", "psychotic", "thinkable",
-    "classy", "tendency", "toothpaste", "derive", "observation",
-    "nebulous", "adjoining", "immense", "noxious", "function"];  
-    this.currentWord = "";
-    this.pickRandomWord();
-    //number of blank spaces
-    this.displaySpaces = [];
-    //takes current word and gives back an array with #of blank spaces
-    const arrayString = this.currentWord.split("");
-    const numSpaces = ("_").repeat(arrayString.length)
-    this.displaySpaces = numSpaces.split("")
-    this.updateDisplayedWord()
-  } 
-  pickRandomWord () {
-    // pick random word from word bank and push to new array
-    const randNum = Math.floor((Math.random() * this.wordBank.length))
-    const newWord = this.wordBank.splice(randNum, 1);
-    this.currentWord = newWord.toString();
+class Word {         constructor(){               this.wordBank =
+["phoenix", "toad", "omniocular", "parselmouth", "azkaban",
+"fiendfyre", "dementor",     "patronus", "nimbus", "mandrake",
+"gringotts", "occlumens",     "herbology", "transfiguration",
+"sectumsempra", "mudblood", "aguamenti", "slytherin", "horcrux",
+"ravenclaw", "hufflepuff", "expelliarmus", "arithmancy", "morsemorde",
+"legilimens", "butterbeer", "goblin", "divination", "potions",
+"veritaserum", "hogwarts", "gryffindoor", "elderwand", "cloak of invisibilty", 
+"resurrection stone", "gaaunt shack", "dumbledore", "severus snape", "valdemort", ];
+this.currentWord = ""; 
+this.pickRandomWord();     //number of blank spaces 
+this.displaySpaces = [];     //takes current word and gives back an array with #of blank spaces     
+const arrayString =
+this.currentWord.split("");     
+const numSpaces =
+("_").repeat(arrayString.length)     
+this.displaySpaces = numSpaces.split("")     
+this.updateDisplayedWord()   
+} 
+pickRandomWord () {     // pick random word from word bank and push to new array
+const randNum = Math.floor((Math.random() * this.wordBank.length))
+const newWord = this.wordBank.splice(randNum, 1);     
+this.currentWord = newWord.toString();
 
   }
   updateDisplayedWord() {
@@ -38,7 +40,7 @@ class Word {
 
 }
 
-const word = new Word();
+let word = new Word();
 
 const game = {
 
@@ -78,10 +80,17 @@ const game = {
         const win = (word.displaySpaces.join(''))
         console.log(win)
         if (win === word.currentWord){
-          alert('you fucking genius!')
+          alert('you are a fucking genius! How much liquid luck have you had today?')
           alert = function() {};
+          // word.currentWord.remove();
+          this.newRound()
           this.wins += 1
-          
+          $('#blankSpace').append(word.displaySpaces)
+          console.log(word.currentWord)
+          console.log(word.displaySpaces)
+
+
+
         }
       }
       // if we didn't find it (see boolean)
@@ -95,13 +104,33 @@ const game = {
       console.log(word.currentWord)
       // console.log(thisword)
 
-
-      if (this.guessesLeft === 0){
-        alert("You suck at Hangman, maybe learn how to spell!")
-        this.losses += 1
-
+      if (this.guessesLeft === 7){
+         $('.photo').attr('src', 'https://pa1.narvii.com/6313/6d1f8c1f6fbb3cb939225680fbd48b313d5a1d57_hq.gif')
       }
-
+      if (this.guessesLeft === 6){
+         $('.photo').attr('src', 'https://media1.popsugar-assets.com/files/thumbor/3ghC65Nc1Wt5pJ1RNzC2mTOrzxY/fit-in/1200x630/filters:format_auto-!!-:strip_icc-!!-:fill-!white!-/2016/03/17/886/n/1922507/7ea54fec98cbee91_HP-7.1/i/Harry-Potter-Deathly-Hallows.gif')
+      }
+      
+      if (this.guessesLeft === 5){
+         $('.photo').attr('src', 'https://2.bp.blogspot.com/-i_ht4jS8DF0/VkjURoxdSrI/AAAAAAAAMqI/OuwFqsAe1hs/s1600/tumblr_mw10hjWmTV1qa3oruo3_500.gif')
+      }
+      if (this.guessesLeft === 4){
+         $('.photo').attr('src', 'http://24.media.tumblr.com/tumblr_lnvgkj5ndt1qb0zfoo1_500.gif')
+      }
+      if (this.guessesLeft === 3){
+         $('.photo').attr('src', 'https://media.giphy.com/media/kECgjyn98wivm/giphy.gif')
+      }
+      if (this.guessesLeft === 2){
+         $('.photo').attr('src', 'https://78.media.tumblr.com/911c375e6af60aac05de9d4f75fbc7d8/tumblr_mz1w03QMpb1riv7lmo6_500.gif')
+      }
+      if (this.guessesLeft === 1){
+         $('.photo').attr('src', 'https://media.giphy.com/media/gIfROMWSH3ndC/giphy.gif')
+      }
+      if (this.guessesLeft === 0){
+        alert("Merlin's Beard, you suck!")
+        this.newRound()
+        this.losses += 1
+      }
       // push letter to used letters
       this.usedLetters.push(" " + letter + " ");
       
@@ -114,7 +143,7 @@ const game = {
   },
 
   updateLetterBox(){
-    $('#attempts').text("Attempts Left: " + this.guessesLeft)
+    $('#attempts').text("Attempts Left: " + "( " + this.guessesLeft + " )")
     $('#wins').text("Games Won: " + this.wins)
     $('#losses').text("Games Lost: " + this.losses)
     $('#usedLetter').text(" " + this.usedLetters + " ") // note: usedLetters is an ARRAY
@@ -122,9 +151,15 @@ const game = {
     // TODO: once you have guesses remaining going down for every guess, 
     // TODO: jQ update remaining guesses also 
   },
-  reset() {
 
-  }
+  newRound(){
+    word = new Word()
+    // word.pickRandomWord();
+    // word.updateDisplayedWord();
+    this.guessesLeft = 8;
+    this.usedLetters = [];
+
+  } 
   // reset() {
     // TODO: get new word (that will autoamtically update scoreboard)
     // TODO: reset guessesRemaining
@@ -139,136 +174,10 @@ $('#name-form').on('submit', (e) => {
   e.preventDefault();
   const guessLetter = $('#guess').val();
   game.checkForLetter(guessLetter);
-  game.reset()
+  // reset input
+  $('#guess').val("")
 
 });   
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- // Hangman
-//   canvas =  function(){
-
-//     myStickman = document.getElementById("stickman");
-//     context = myStickman.getContext('2d');
-//     context.beginPath();
-//     context.strokeStyle = "#fff";
-//     context.lineWidth = 2;
-//   };
-  
-//     head = function(){
-//       myStickman = document.getElementById("stickman");
-//       context = myStickman.getContext('2d');
-//       context.beginPath();
-//       context.arc(60, 25, 10, 0, Math.PI*2, true);
-//       context.stroke();
-//     }
-    
-//   draw = function($pathFromx, $pathFromy, $pathTox, $pathToy) {
-    
-//     context.moveTo($pathFromx, $pathFromy);
-//     context.lineTo($pathTox, $pathToy);
-//     context.stroke(); 
-// }
-
-//    frame1 = function() {
-//      draw (0, 150, 150, 150);
-//    };
-   
-//    frame2 = function() {
-//      draw (10, 0, 10, 600);
-//    };
-  
-//    frame3 = function() {
-//      draw (0, 5, 70, 5);
-//    };
-  
-//    frame4 = function() {
-//      draw (60, 5, 60, 15);
-//    };
-  
-//    torso = function() {
-//      draw (60, 36, 60, 70);
-//    };
-  
-//    rightArm = function() {
-//      draw (60, 46, 100, 50);
-//    };
-  
-//    leftArm = function() {
-//      draw (60, 46, 20, 50);
-//    };
-  
-//    rightLeg = function() {
-//      draw (60, 70, 100, 100);
-//    };
-  
-//    leftLeg = function() {
-//      draw (60, 70, 20, 100);
-//    };
-  
-//   drawArray = [rightLeg, leftLeg, rightArm, leftArm,  torso,  head, frame4, frame3, frame2, frame1]; 
-
-
-//   // OnClick Function
-//    check = function () {
-//     list.onclick = function () {
-//       var geuss = (this.innerHTML);
-//       this.setAttribute("class", "active");
-//       this.onclick = null;
-//       for (var i = 0; i < word.length; i++) {
-//         if (word[i] === geuss) {
-//           geusses[i].innerHTML = geuss;
-//           counter += 1;
-//         } 
-//       }
-//       var j = (word.indexOf(geuss));
-//       if (j === -1) {
-//         lives -= 1;
-//         comments();
-//         animate();
-//       } else {
-//         comments();
-//       }
-//     }
-//   }
-  
-    
-  // // Play
-  // play = function () {
-  //   categories = [
-  //       ["everton", "liverpool", "swansea", "chelsea", "hull", "manchester-city", "newcastle-united"],
-  //       ["alien", "dirty-harry", "gladiator", "finding-nemo", "jaws"],
-  //       ["manchester", "milan", "madrid", "amsterdam", "prague"]
-  //   ];
-
-  //   chosenCategory = categories[Math.floor(Math.random() * categories.length)];
-  //   word = chosenCategory[Math.floor(Math.random() * chosenCategory.length)];
-  //   word = word.replace(/\s/g, "-");
-  //   console.log(word);
-  //   buttons();
-
-  //   geusses = [ ];
-  //   lives = 10;
-  //   counter = 0;
-  //   space = 0;
-  //   result();
-  //   comments();
-  //   selectCat();
-  //   canvas();
-  // }
-
-  // play();
 
