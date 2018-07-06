@@ -25,9 +25,8 @@ class Word {
   }
   updateDisplayedWord() {
     //want to have array with no commas
-    // DONE: fix comma problem: iterate over displaySpaces, append each letter, and maybe a space, to theDOM
-
-    // clear what was previously there
+  
+    // clear what was previously there in checkForLetter
     
     for (let i = 0; i < this.displaySpaces.length; i++){
       $('#blankSpace').append(this.displaySpaces[i] + " ")
@@ -56,14 +55,16 @@ const game = {
       const splitString = word.currentWord.split(""); // get array of characters
       // loop through array of chars, if it matches, change letter in displaySpaces at that index
 
+      // inputs letter if there are multiple of the same in a word
       for (i = 0; i < splitString.length; i++){ 
         if (letter === splitString[i]){
           //switch letter everywhere it occurs in displaySpaces
           word.displaySpaces[i] = letter;
         } 
-      } 
-
+      }
+      //loops through word but breaks once correct letter confirmed
       for (i = 0; i < splitString.length; i++){
+ 
         if (letter === splitString[i]){
           //switch letter everywhere it occurs in displaySpaces
           correctLetter = true
@@ -71,8 +72,12 @@ const game = {
         } else {
           correctLetter = false;
         }
-        if (splitString[i] === $('#blankSpace')[i]){
+
+        const win = (word.displaySpaces.join(''))
+        console.log(win)
+        if (win === word.currentWord){
           alert('you fucking genius!')
+          
         }
       }
       // if we didn't find it (see boolean)
@@ -80,7 +85,11 @@ const game = {
         // subtract score
         this.guessesLeft -= 1;
       }
+
       console.log(correctLetter)
+      console.log(word.currentWord)
+      // console.log(thisword)
+
 
       if (this.guessesLeft === 0){
         alert("You suck at Hangman, maybe learn how to spell!")
