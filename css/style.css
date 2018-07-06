@@ -6,7 +6,9 @@ h1 {
   display: flex;
   justify-content: center
 }
-
+#attempts {
+  size: 10px;
+}
 .container{
   background: lightgrey;
   height:300px;
@@ -28,10 +30,11 @@ h2{
   font-size: 35px;
 }
 h4{
-  font-size: 25px;
+  font-size: 20px;
   display: flex;
   justify-content: flex-start;
   margin-left: 10px;
+  margin-bottom: 5px;
 }
 #blankSpace{
   font-size: 80px;

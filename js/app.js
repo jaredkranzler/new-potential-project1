@@ -44,6 +44,8 @@ const game = {
 
   usedLetters: [],
   guessesLeft: 8,
+  wins: 0,
+  losses: 0,
 
 
   //see if letter user guessd is in the word
@@ -77,6 +79,8 @@ const game = {
         console.log(win)
         if (win === word.currentWord){
           alert('you fucking genius!')
+          alert = function() {};
+          this.wins += 1
           
         }
       }
@@ -84,6 +88,7 @@ const game = {
       if (false === correctLetter){
         // subtract score
         this.guessesLeft -= 1;
+
       }
 
       console.log(correctLetter)
@@ -93,6 +98,8 @@ const game = {
 
       if (this.guessesLeft === 0){
         alert("You suck at Hangman, maybe learn how to spell!")
+        this.losses += 1
+
       }
 
       // push letter to used letters
@@ -107,7 +114,9 @@ const game = {
   },
 
   updateLetterBox(){
-    $('#attempts').text(game.guessesLeft)
+    $('#attempts').text("Attempts Left: " + this.guessesLeft)
+    $('#wins').text("Games Won: " + this.wins)
+    $('#losses').text("Games Lost: " + this.losses)
     $('#usedLetter').text(" " + this.usedLetters + " ") // note: usedLetters is an ARRAY
 
     // TODO: once you have guesses remaining going down for every guess, 
